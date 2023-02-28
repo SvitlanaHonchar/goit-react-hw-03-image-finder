@@ -5,10 +5,14 @@ class ImageGalleryItem extends Component {
   render() {
     const { photo } = this.props;
     return (
-      <div>
-        <img src={photo.webformatURL} alt={photo.tags} />
+      <>
+        <img
+          src={photo.webformatURL}
+          alt={photo.tags}
+          className="ImageGalleryItem-image"
+        />
         <Modal />
-      </div>
+      </>
     );
   }
 }

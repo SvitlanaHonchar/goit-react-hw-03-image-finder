@@ -5,18 +5,18 @@ class ImageGallery extends Component {
   render() {
     const { photos } = this.props;
     return (
-      <div>
-        <ul>
+      <>
+        <ul className="ImageGallery">
           {photos !== null &&
             photos.map(photo => {
               return (
-                <li key={photo.id}>
+                <li key={photo.id} className="ImageGalleryItem">
                   <ImageGalleryItem photo={photo} />
                 </li>
               );
             })}
         </ul>
-      </div>
+      </>
     );
   }
 }

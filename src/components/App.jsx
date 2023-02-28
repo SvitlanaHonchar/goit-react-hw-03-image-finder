@@ -8,12 +8,22 @@ import { requestPhotos } from 'services/api';
 class App extends Component {
   state = {
     photos: null,
+    isLoading: false,
+    error: null,
   };
 
   componentDidMount() {
     const fetchPhotos = async () => {
-      const photos = await requestPhotos();
-      this.setState({ photos: photos });
+      try {
+        this.setState({ isLoading: true });
+
+        const photos = await requestPhotos();
+        this.setState({ photos: photos });
+      } catch (error) {
+        this.setState({ error: error.message });
+      } finally {
+        this.setState({ isLoading: false });
+      }
     };
     fetchPhotos();
   }
@@ -21,18 +31,25 @@ class App extends Component {
   render() {
     return (
       <div
-        style={{
-          height: '100vh',
-          // display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
-        }}
+        className="App"
+        style={
+          {
+            // height: '100vh',
+            // display: 'flex',
+            // justifyContent: 'center',
+            // alignItems: 'center',
+            // fontSize: 40,
+            // color: '#010101',
+          }
+        }
       >
         <Searchbar />
+        {this.state.isLoading && <Loader />}
+        {this.state.error !== null && (
+          <i>An error {this.state.error} occured</i>
+        )}
+
         <ImageGallery photos={this.state.photos} />
-        <Loader />
         <Button />
       </div>
     );
