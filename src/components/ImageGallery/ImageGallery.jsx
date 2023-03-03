@@ -2,6 +2,7 @@ import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 import React, { Component } from 'react';
 import { requestPhotos } from 'services/api';
 import Loader from 'components/Loader/Loader';
+import PropTypes from 'prop-types';
 
 class ImageGallery extends Component {
   state = {
@@ -21,7 +22,7 @@ class ImageGallery extends Component {
           const data = await requestPhotos(query, page);
           const photos = data.hits;
           console.log(photos);
-          console.log(data.totalHits);
+          // console.log(data.totalHits);
 
           const totalHits = data.totalHits;
           this.setState({ totalHits });
@@ -85,3 +86,9 @@ class ImageGallery extends Component {
 }
 
 export default ImageGallery;
+
+ImageGallery.propTypes = {
+  query: PropTypes.string.isRequired,
+  page: PropTypes.number.isRequired,
+  totalPhotos: PropTypes.func.isRequired,
+};

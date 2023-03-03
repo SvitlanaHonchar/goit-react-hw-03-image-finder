@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
 
 Modal.setAppElement('#root');
 
@@ -25,3 +26,9 @@ class ImgModal extends Component {
 }
 
 export default ImgModal;
+
+ImgModal.propTypes = {
+  photo: PropTypes.object,
+  closeModal: PropTypes.func,
+  isOpen: PropTypes.bool,
+};

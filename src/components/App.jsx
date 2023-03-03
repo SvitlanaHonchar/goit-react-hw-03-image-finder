@@ -28,7 +28,7 @@ class App extends Component {
   };
 
   totalPhotos = totalHits => {
-    console.log(totalHits);
+    // console.log(totalHits);
     this.setState({ totalHits });
   };
 

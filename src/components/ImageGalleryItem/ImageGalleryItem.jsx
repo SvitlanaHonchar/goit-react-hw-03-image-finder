@@ -1,5 +1,6 @@
 import ImgModal from 'components/Modal/Modal';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ImageGalleryItem extends Component {
   state = {
@@ -31,3 +32,7 @@ class ImageGalleryItem extends Component {
 }
 
 export default ImageGalleryItem;
+
+ImageGalleryItem.propTypes = {
+  photo: PropTypes.object,
+};
