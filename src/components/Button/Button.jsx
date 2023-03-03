@@ -8,7 +8,7 @@ class Button extends Component {
 
   render() {
     return (
-      <div>
+      <div className="ButtonContainer">
         <button type="button" className="Button" onClick={this.handleLoadMore}>
           Load more
         </button>

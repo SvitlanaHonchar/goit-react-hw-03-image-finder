@@ -11,7 +11,6 @@ class ImageGalleryItem extends Component {
 
   render() {
     const { photo } = this.props;
-    const { isModalOpen } = this.state;
     return (
       <>
         <ImgModal

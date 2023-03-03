@@ -8,22 +8,28 @@ import React, { Component } from 'react';
 class App extends Component {
   state = {
     query: '',
-    photos: null,
+    // photos: null,
     isLoading: false,
     error: null,
     page: 1,
+    totalHits: null,
   };
 
   handleFormSubmit = query => {
     this.setState({ query, page: 1 });
   };
 
-  handleLoadMore = page => {
+  handleLoadMore = () => {
     this.setState(prevState => {
       return {
         page: prevState.page + 1,
       };
     });
+  };
+
+  totalPhotos = totalHits => {
+    console.log(totalHits);
+    this.setState({ totalHits });
   };
 
   componentDidMount() {
@@ -39,9 +45,16 @@ class App extends Component {
           <i>An error {this.state.error} occured</i>
         )}
 
-        <ImageGallery query={this.state.query} page={this.state.page} />
+        <ImageGallery
+          query={this.state.query}
+          page={this.state.page}
+          totalPhotos={this.totalPhotos}
+        />
 
-        <Button onClick={this.handleLoadMore} />
+        {this.state.totalHits > 12 &&
+          this.state.totalHits / 12 > this.state.page && (
+            <Button onClick={this.handleLoadMore} />
+          )}
       </div>
     );
   }

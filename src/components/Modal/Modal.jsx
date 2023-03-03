@@ -12,9 +12,10 @@ class ImgModal extends Component {
         isOpen={isOpen}
         contentLabel="Example Modal"
         onRequestClose={closeModal}
+        className="ReactModal"
       >
         <div className="Overlay" onClick={closeModal}>
-          <div className="ImgModal">
+          <div className="Modal">
             <img src={photo.largeImageURL} alt={photo.tags} />
           </div>
         </div>

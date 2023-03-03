@@ -6,6 +6,7 @@ import Loader from 'components/Loader/Loader';
 class ImageGallery extends Component {
   state = {
     photos: null,
+    // totalHits: null,
     error: null,
     isLoading: false,
   };
@@ -17,8 +18,15 @@ class ImageGallery extends Component {
       const fetchPhotos = async () => {
         try {
           this.setState({ isLoading: true });
-          const photos = await requestPhotos(query, page);
+          const data = await requestPhotos(query, page);
+          const photos = data.hits;
           console.log(photos);
+          console.log(data.totalHits);
+
+          const totalHits = data.totalHits;
+          this.setState({ totalHits });
+          this.props.totalPhotos(totalHits);
+
           this.setState({ photos });
         } catch (error) {
           this.setState({ error: error.message });
@@ -34,7 +42,9 @@ class ImageGallery extends Component {
       const fetchPhotos = async () => {
         try {
           this.setState({ isLoading: true });
-          const photos = await requestPhotos(query, page);
+          const data = await requestPhotos(query, page);
+          const photos = data.hits;
+
           console.log(photos);
           this.setState(prevState => {
             return {

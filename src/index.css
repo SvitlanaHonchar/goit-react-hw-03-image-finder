@@ -50,6 +50,7 @@ li {
  */
 .App {
   display: grid;
+
   grid-template-columns: 1fr;
   grid-gap: 16px;
   padding-bottom: 24px;
@@ -191,6 +192,10 @@ li {
   z-index: 1200;
 }
 
+.ReactModal {
+  background-color: transparent;
+}
+
 .Modal {
   max-width: calc(100vw - 48px);
   max-height: calc(100vh - 24px);
@@ -199,6 +204,12 @@ li {
 /*
 * Стили компонента Buton (Load more)
 */
+.ButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .Button {
   padding: 8px 16px;
   border-radius: 2px;
