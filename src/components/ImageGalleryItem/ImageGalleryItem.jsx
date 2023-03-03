@@ -1,4 +1,4 @@
-import Modal from 'components/Modal/Modal';
+import ImgModal from 'components/Modal/Modal';
 import React, { Component } from 'react';
 
 class ImageGalleryItem extends Component {
@@ -14,13 +14,11 @@ class ImageGalleryItem extends Component {
     const { isModalOpen } = this.state;
     return (
       <>
-        {isModalOpen && (
-          <Modal
-            photo={photo}
-            closeModal={this.closeModal}
-            isOpen={this.state.isModalOpen}
-          />
-        )}
+        <ImgModal
+          photo={photo}
+          closeModal={this.closeModal}
+          isOpen={this.state.isModalOpen}
+        />
 
         <img
           src={photo.webformatURL}

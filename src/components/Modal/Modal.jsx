@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
+import Modal from 'react-modal';
 
-class Modal extends Component {
+Modal.setAppElement('#root');
+
+class ImgModal extends Component {
   render() {
-    const { photo, closeModal } = this.props;
+    const { isOpen, photo, closeModal } = this.props;
 
     return (
-      <div className="Overlay" onClick={closeModal}>
-        <div className="Modal">
-          <img src={photo.largeImageURL} alt={photo.tags} />
+      <Modal
+        isOpen={isOpen}
+        contentLabel="Example Modal"
+        onRequestClose={closeModal}
+      >
+        <div className="Overlay" onClick={closeModal}>
+          <div className="ImgModal">
+            <img src={photo.largeImageURL} alt={photo.tags} />
+          </div>
         </div>
-      </div>
+      </Modal>
     );
   }
 }
 
-export default Modal;
+export default ImgModal;
