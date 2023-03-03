@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
+import css from './Modal.module.css';
 
 Modal.setAppElement('#root');
 
@@ -13,10 +14,10 @@ class ImgModal extends Component {
         isOpen={isOpen}
         contentLabel="Example Modal"
         onRequestClose={closeModal}
-        className="ReactModal"
+        className={css.ReactModal}
       >
-        <div className="Overlay" onClick={closeModal}>
-          <div className="Modal">
+        <div className={css.Overlay} onClick={closeModal}>
+          <div className={css.Modal}>
             <img src={photo.largeImageURL} alt={photo.tags} />
           </div>
         </div>

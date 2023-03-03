@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { requestPhotos } from 'services/api';
 import Loader from 'components/Loader/Loader';
 import PropTypes from 'prop-types';
+import css from './ImageGallery.module.css';
 
 class ImageGallery extends Component {
   state = {
@@ -67,14 +68,14 @@ class ImageGallery extends Component {
     return (
       <>
         {this.state.isLoading && <Loader />}
-        <ul className="ImageGallery">
+        <ul className={css.ImageGallery}>
           {(photos !== null && photos.length) === 0 && (
             <i>Nothing found, try to search something else</i>
           )}
           {photos !== null &&
             photos.map(photo => {
               return (
-                <li key={photo.id} className="ImageGalleryItem">
+                <li key={photo.id} className={css.ImageGalleryItem}>
                   <ImageGalleryItem photo={photo} />
                 </li>
               );

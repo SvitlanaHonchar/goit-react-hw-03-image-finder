@@ -1,6 +1,7 @@
 import ImgModal from 'components/Modal/Modal';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import css from './ImageGalleryItem.module.css';
 
 class ImageGalleryItem extends Component {
   state = {
@@ -23,7 +24,7 @@ class ImageGalleryItem extends Component {
         <img
           src={photo.webformatURL}
           alt={photo.tags}
-          className="ImageGalleryItem-image"
+          className={css.ImageGalleryItemImage}
           onClick={this.openModal}
         />
       </>
