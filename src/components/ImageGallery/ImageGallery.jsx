@@ -11,15 +11,36 @@ class ImageGallery extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.query !== this.props.query) {
+    const { query, page } = this.props;
+    if (prevProps.query !== query) {
       console.log('query changed');
       const fetchPhotos = async () => {
         try {
           this.setState({ isLoading: true });
-          // console.log('this.props.query:', this.props.query);
-          const photos = await requestPhotos(this.props.query);
+          const photos = await requestPhotos(query, page);
           console.log(photos);
           this.setState({ photos });
+        } catch (error) {
+          this.setState({ error: error.message });
+        } finally {
+          this.setState({ isLoading: false });
+        }
+      };
+      fetchPhotos();
+    }
+
+    if (prevProps.page !== page && page !== 1) {
+      console.log('page changed');
+      const fetchPhotos = async () => {
+        try {
+          this.setState({ isLoading: true });
+          const photos = await requestPhotos(query, page);
+          console.log(photos);
+          this.setState(prevState => {
+            return {
+              photos: [...prevState.photos, ...photos],
+            };
+          });
         } catch (error) {
           this.setState({ error: error.message });
         } finally {
@@ -36,6 +57,9 @@ class ImageGallery extends Component {
       <>
         {this.state.isLoading && <Loader />}
         <ul className="ImageGallery">
+          {(photos !== null && photos.length) === 0 && (
+            <i>Nothing found, try to search something else</i>
+          )}
           {photos !== null &&
             photos.map(photo => {
               return (

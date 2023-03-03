@@ -10,30 +10,23 @@ class Searchbar extends Component {
     this.setState({
       query: e.currentTarget.value.toLowerCase(),
     });
-    // console.log(this.state.query);
   };
 
   handleSubmit = e => {
+    const { query } = this.state;
     e.preventDefault();
-    if (this.state.query.trim() === '') {
+    if (query.trim() === '') {
       alert('Enter your query');
       return;
     }
-    this.props.onSubmit(this.state.query);
+    this.props.onSubmit(query);
     this.setState({ query: '' });
   };
 
   render() {
-    // const { onSubmit } = this.props;
     return (
       <header className="Searchbar">
-        <form
-          className="SearchForm"
-          // onSubmit={e => {
-          // onSubmit(e, this.state.query);
-          // }}
-          onSubmit={this.handleSubmit}
-        >
+        <form className="SearchForm" onSubmit={this.handleSubmit}>
           <button type="submit" className="SearchForm-button">
             <ImSearch style={{ width: 20, height: 20 }} />
           </button>
@@ -43,8 +36,8 @@ class Searchbar extends Component {
             type="text"
             name="query"
             value={this.state.query}
-            // autocomplete="off"
-            // autofocus
+            autoComplete="off"
+            autoFocus
             onChange={this.handleInput}
             placeholder="Search images and photos"
           />

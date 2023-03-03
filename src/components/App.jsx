@@ -11,11 +11,19 @@ class App extends Component {
     photos: null,
     isLoading: false,
     error: null,
+    page: 1,
   };
 
   handleFormSubmit = query => {
-    // console.log(query);
-    this.setState({ query });
+    this.setState({ query, page: 1 });
+  };
+
+  handleLoadMore = page => {
+    this.setState(prevState => {
+      return {
+        page: prevState.page + 1,
+      };
+    });
   };
 
   componentDidMount() {
@@ -31,9 +39,9 @@ class App extends Component {
           <i>An error {this.state.error} occured</i>
         )}
 
-        <ImageGallery query={this.state.query} />
+        <ImageGallery query={this.state.query} page={this.state.page} />
 
-        <Button />
+        <Button onClick={this.handleLoadMore} />
       </div>
     );
   }
