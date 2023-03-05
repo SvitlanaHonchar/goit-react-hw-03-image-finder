@@ -8,7 +8,9 @@ class ImageGalleryItem extends Component {
     isModalOpen: false,
   };
 
-  openModal = () => this.setState({ isModalOpen: true });
+  openModal = () => {
+    this.setState({ isModalOpen: true });
+  };
   closeModal = () => this.setState({ isModalOpen: false });
 
   render() {
