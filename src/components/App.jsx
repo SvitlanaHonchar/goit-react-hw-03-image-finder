@@ -49,13 +49,12 @@ class App extends Component {
 
           const data = await requestPhotos(this.state.query, this.state.page);
           const photos = data.hits;
+          const totalHits = data.totalHits;
 
           this.setState(prevState => ({
             photos: [...prevState.photos, ...photos],
+            totalHits,
           }));
-
-          const totalHits = data.totalHits;
-          this.setState({ totalHits });
         } catch (error) {
           this.setState({ error: error.message });
         } finally {
@@ -74,7 +73,9 @@ class App extends Component {
         {this.state.error !== null && (
           <i>An error {this.state.error} occured</i>
         )}
-
+        {(this.state.photos !== null && this.state.photos.length) === 0 && (
+          <i>Nothing found, try to search something else</i>
+        )}
         <ImageGallery photos={this.state.photos} />
 
         {this.state.totalHits > 12 &&

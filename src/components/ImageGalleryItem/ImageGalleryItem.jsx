@@ -8,26 +8,26 @@ class ImageGalleryItem extends Component {
     isModalOpen: false,
   };
 
-  openModal = () => {
-    this.setState({ isModalOpen: true });
+  toggleModal = () => {
+    this.setState(({ isModalOpen }) => ({ isModalOpen: !isModalOpen }));
   };
-  closeModal = () => this.setState({ isModalOpen: false });
 
   render() {
+    const { isModalOpen } = this.state;
     const { photo } = this.props;
     return (
       <>
-        <ImgModal
-          photo={photo}
-          closeModal={this.closeModal}
-          isOpen={this.state.isModalOpen}
-        />
+        {isModalOpen && (
+          <ImgModal toggleModal={this.toggleModal}>
+            <img src={photo.largeImageURL} alt={photo.tags} />
+          </ImgModal>
+        )}
 
         <img
           src={photo.webformatURL}
           alt={photo.tags}
           className={css.ImageGalleryItemImage}
-          onClick={this.openModal}
+          onClick={this.toggleModal}
         />
       </>
     );

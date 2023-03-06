@@ -1,27 +1,37 @@
 import React, { Component } from 'react';
-import Modal from 'react-modal';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import css from './Modal.module.css';
 
-Modal.setAppElement('#root');
+const modalRoot = document.querySelector('#modal-root');
 
 class ImgModal extends Component {
-  render() {
-    const { isOpen, photo, closeModal } = this.props;
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyDown);
+  }
 
-    return (
-      <Modal
-        isOpen={isOpen}
-        contentLabel="Example Modal"
-        onRequestClose={closeModal}
-        className={css.ReactModal}
-      >
-        <div className={css.Overlay} onClick={closeModal}>
-          <div className={css.Modal}>
-            <img src={photo.largeImageURL} alt={photo.tags} />
-          </div>
-        </div>
-      </Modal>
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+  }
+
+  handleKeyDown = e => {
+    if (e.code === 'Escape') {
+      this.props.toggleModal();
+    }
+  };
+
+  handleBackDrop = e => {
+    if (e.target === e.currentTarget) {
+      this.props.toggleModal();
+    }
+  };
+
+  render() {
+    return createPortal(
+      <div className={css.Overlay} onClick={this.handleBackDrop}>
+        <div className={css.Modal}>{this.props.children}</div>
+      </div>,
+      modalRoot
     );
   }
 }
@@ -30,6 +40,5 @@ export default ImgModal;
 
 ImgModal.propTypes = {
   photo: PropTypes.object,
-  closeModal: PropTypes.func,
-  isOpen: PropTypes.bool,
+  toggleModal: PropTypes.func,
 };

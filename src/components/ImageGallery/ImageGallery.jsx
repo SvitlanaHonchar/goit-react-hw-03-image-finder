@@ -9,9 +9,6 @@ class ImageGallery extends Component {
     return (
       <>
         <ul className={css.ImageGallery}>
-          {(photos !== null && photos.length) === 0 && (
-            <i>Nothing found, try to search something else</i>
-          )}
           {photos !== null &&
             photos.map(photo => {
               return (
